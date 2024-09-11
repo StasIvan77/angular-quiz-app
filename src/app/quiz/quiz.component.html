@@ -1,0 +1,17 @@
+<div *ngIf="currentQuestion">    
+    <h2 [innerHTML]="currentQuestion.question"></h2>
+    
+    <div *ngIf="!isQuizComplete()">
+      <ul>
+        <li *ngFor="let answer of answers">
+          <button (click)="selectAnswer(answer)" [innerHTML]="answer"></button>
+        </li>
+      </ul>
+    </div>
+    
+    <div>      
+      <p>Your Score: {{ score() }}</p>
+      <button (click)="cancelQuiz()">Return to Home</button>
+    </div>
+  </div>
+  

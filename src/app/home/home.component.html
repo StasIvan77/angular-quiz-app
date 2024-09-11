@@ -1,1 +1,47 @@
-<p>home works!</p>
+
+<form [formGroup]="quizForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category" name="category">
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Number of Questions</mat-label>
+      <input matInput formControlName="amount" type="number" />
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Difficulty</mat-label>
+      <mat-select formControlName="difficulty">
+        <mat-option value="easy">Easy</mat-option>
+        <mat-option value="medium">Medium</mat-option>
+        <mat-option value="hard">Hard</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option value="multiple">Multiple Choice</mat-option>
+        <mat-option value="boolean">True/False</mat-option>
+        <mat-option value="">Any Type</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Encoding</mat-label>
+      <mat-select formControlName="encoding">
+        <mat-option value="urlLegacy">Legacy URL Encoding</mat-option>
+        <mat-option value="url3986">ERL Encoding (RFC 3986)</mat-option>
+        <mat-option value="base64">Base64 Encoding</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+  
+  
