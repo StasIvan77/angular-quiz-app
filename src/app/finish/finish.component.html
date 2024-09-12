@@ -1,1 +1,13 @@
-<p>finish works!</p>
+<div class="finish-container">
+    <h2>Quiz Finished!</h2>
+  
+    <div class="results">
+      <p>Total Questions: {{ totalQuestions }}</p>
+      <p>Correct Answers: {{ correctAnswers }}</p>
+      <p>Your Score: {{ score }}</p>
+      <p>Time Taken: {{ timeTaken }}</p>
+    </div>
+  
+    <button mat-raised-button color="primary" (click)="restartQuiz()">Restart Quiz</button>
+  </div>
+  

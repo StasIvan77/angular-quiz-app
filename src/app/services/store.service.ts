@@ -12,6 +12,12 @@ export class StoreService {
   private currentQuiz: WritableSignal<Quiz | null> = signal(null);
   currentQuiz$ = this.currentQuiz; // Use signal directly
 
+  private quizResults = signal<{
+    score: number;
+    correctAnswers: number;
+    totalQuestions: number;
+    timeTaken: string;
+  } | null>(null);
   
 
   constructor(private quizService: QuizService) {
@@ -42,5 +48,22 @@ export class StoreService {
 
   loadQuestions(category: number | null, amount: number): void {
     // Implement question loading logic here, handle `category` being `null`
+  }
+
+
+  //LOGIC FOR COUNT RESULTS
+  // Set the results after the quiz is finished
+  setQuizResults(results: { score: number; correctAnswers: number; totalQuestions: number; timeTaken: string }) {
+    this.quizResults.set(results);
+  }
+
+  // Get the quiz results for the FinishComponent
+  getQuizResults() {
+    return this.quizResults();
+  }
+
+  // Reset the quiz state for a new quiz
+  resetQuiz() {
+    this.quizResults.set(null);
   }
 }
