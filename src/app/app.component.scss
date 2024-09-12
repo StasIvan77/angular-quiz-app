@@ -1,0 +1,40 @@
+/* src/app/app.component.scss */
+
+/* Full-screen overlay */
+.overlay {
+    @apply fixed inset-0 bg-blue-500 flex items-center justify-center;
+    z-index: 1;
+    cursor: pointer;
+    transition: opacity 1s;
+  }
+
+  .highlight {
+    @apply text-yellow-400; // Tailwind class for yellow text
+  }
+  
+  /* Initial text styling */
+  .full-screen-text {
+    @apply text-white text-center;
+    font-size: 5rem; /* Adjust size as needed */
+    transition: transform 1s, font-size 1s;
+  }
+  
+  /* Animation when scaling */
+  .overlay.transition-scaling {
+    .full-screen-text {
+      @apply text-5xl; /* Size for initial display */
+    }
+  }
+  
+  .overlay.transition-scaling.final {
+    .full-screen-text {
+      @apply text-9xl; /* Size for final display */
+      transform: scale(1.5); /* Scale up */
+    }
+  }
+  
+  /* Adjust main for content */
+  main {
+    @apply relative h-screen overflow-hidden;
+  }
+  

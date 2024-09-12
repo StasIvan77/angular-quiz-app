@@ -1,4 +1,17 @@
-<!-- app.component.html -->
-<h1 class="text-3xl font-bold underline text-blue-500">
-  Hello, Tailwind CSS!
-</h1>
+<!-- src/app/app.component.html -->
+<div 
+  class="overlay" 
+  *ngIf="!showRouterOutlet"
+  (click)="onOverlayClick()"
+  [@fadeInOut]="isNavigating ? 'out' : 'in'"
+>
+  <div class="full-screen-text">
+    QUIZ<span class="highlight">time</span>
+  </div>
+</div>
+
+<!-- Conditionally display router outlet after animation -->
+<router-outlet 
+  *ngIf="showRouterOutlet" 
+  [@routerAnimation]="isNavigating ? 'in' : 'out'"
+></router-outlet>
