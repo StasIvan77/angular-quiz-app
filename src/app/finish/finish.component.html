@@ -1,13 +1,15 @@
 <div class="finish-container">
     <h2>Quiz Finished!</h2>
   
-    <div class="results">
-      <p>Total Questions: {{ totalQuestions }}</p>
-      <p>Correct Answers: {{ correctAnswers }}</p>
-      <p>Your Score: {{ score }}</p>
-      <p>Time Taken: {{ timeTaken }}</p>
-    </div>
-  
+    <!-- In finish.component.html -->
+    <div>
+    <p>Score: {{ score }}</p>
+    <p>Correct Answers: {{ correctAnswers }}</p>
+    <p>Total Questions: {{ totalQuestions }}</p>
+    <p>Time Taken: {{ timeTaken }}</p>
     <button mat-raised-button color="primary" (click)="restartQuiz()">Restart Quiz</button>
+  </div>
+  
+  
   </div>
   

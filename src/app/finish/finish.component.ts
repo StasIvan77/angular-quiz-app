@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [],
   templateUrl: './finish.component.html',
-  styleUrl: './finish.component.scss'
+  styleUrls: ['./finish.component.scss']
 })
 export class FinishComponent implements OnInit {
   score: number = 0;
@@ -24,11 +24,19 @@ export class FinishComponent implements OnInit {
       this.score = quizResults.score;
       this.correctAnswers = quizResults.correctAnswers;
       this.totalQuestions = quizResults.totalQuestions;
-      this.timeTaken = quizResults.timeTaken;
+
+      // Convert timeTaken to a number of seconds and format it
+      this.timeTaken = this.formatTime(Number(quizResults.timeTaken)); // Assuming timeTaken is already a string representing seconds
     }
   }
 
-  // Function to restart the quiz
+  private formatTime(seconds: number): string {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}m ${secs}s`;
+  }
+  
+
   restartQuiz(): void {
     this.storeService.resetQuiz();
     this.router.navigate(['/home']); // Redirect back to home page to start again

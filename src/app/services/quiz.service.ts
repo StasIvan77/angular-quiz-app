@@ -23,6 +23,22 @@ export class QuizService {
 
   constructor(private http: HttpClient) {}
 
+   // Helper method to handle token reset and retry
+   private handleTokenError<T>(observable: Observable<T>): Observable<T> {
+    return observable.pipe(
+      catchError(error => {
+        if (error.status === 429) {
+          // Token expired, reset and retry
+          console.log('Token expired or rate limit exceeded. Resetting token.');
+          return this.resetSessionToken().pipe(
+            switchMap(() => observable)
+          );
+        }
+        return throwError(() => error);
+      })
+    );
+  }
+
   getSessionToken(): Observable<string> {
     if (this.token) {
       console.log('Using cached session token:', this.token);
@@ -79,6 +95,7 @@ export class QuizService {
         console.log('Request URL params:', params.toString());
   
         return this.http.get<{ results: Question[] }>(`${this.apiUrl}api.php`, { params }).pipe(
+          this.handleTokenError,
           tap(response => console.log('Questions fetched:', response)),
           map(response => response.results),
           catchError((error) => {
@@ -118,9 +135,24 @@ export class QuizService {
   }
 
   // Fetch random quizzes
-  getRandomQuiz(count: number): Observable<Quiz[]> {
+  getRandomQuiz(amount: number): Observable<any> {
+    console.log('Fetching random quiz with amount:', amount);
     return this.getSessionToken().pipe(
-      switchMap(token => this.http.get<Quiz[]>(`${this.apiUrl}api.php?amount=${count}&token=${token}`))
+      switchMap(token => {
+        const params = new HttpParams()
+          .set('amount', amount.toString())
+          .set('token', token);
+
+        console.log('Request URL params:', params.toString());
+
+        return this.http.get<any>(`${this.apiUrl}api.php`, { params }).pipe(
+          tap(response => console.log('Random quiz fetched:', response)),
+          catchError(error => {
+            console.error('Error fetching random quiz:', error);
+            return throwError(error);
+          })
+        );
+      })
     );
   }
 
@@ -156,6 +188,7 @@ export class QuizService {
         console.log('Request URL with params:', httpParams.toString());
   
         return this.http.get<any>(`${this.apiUrl}api.php`, { params: httpParams }).pipe(
+          this.handleTokenError,
           tap(response => console.log('Quizzes fetched:', response)),
           catchError((error) => {
             if (error.status === 429) {

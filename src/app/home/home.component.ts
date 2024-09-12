@@ -104,16 +104,9 @@ export class HomeComponent implements OnInit {
   }
 
   randomQuiz(): void {
-    const quiz: Quiz = {
-      category: this.defaultCategory,
-      amount: this.quizForm.value.amount,
-      difficulty: this.quizForm.value.difficulty,
-      questions: [],
-      type: this.quizForm.value.type, // Add type
-      encoding: this.quizForm.value.encoding // Add encoding
-    };
-
-    this.storeService.setCurrentQuiz(quiz);
-    this.router.navigate(['/quiz']);
+    this.quizService.getRandomQuiz(3).subscribe(quiz => {
+      this.storeService.setCurrentQuiz(quiz);
+      this.router.navigate(['/quiz']);
+    });
   }
 }

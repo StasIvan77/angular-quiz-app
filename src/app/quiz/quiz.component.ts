@@ -40,8 +40,14 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.calculateResults();
-  }
+  this.calculateResults();
+  this.storeService.setQuizResults({
+    score: this.score(),
+    correctAnswers: this.correctAnswers,
+    totalQuestions: this.quiz()?.questions?.length || 0,
+    timeTaken: this.timeTaken
+  });
+}
 
   ngOnInit(): void {
     const currentQuiz = this.storeService.getCurrentQuiz();
@@ -54,7 +60,10 @@ export class QuizComponent implements OnInit, OnDestroy {
         this.sanitizer.bypassSecurityTrustHtml(decodeHtmlEntities(question.question))
       );
       //console.log(decodeHtmlEntities(quizValue.questions[0].question))
-      this.shuffleAnswers()
+      this.shuffleAnswers();
+        } else {
+        console.error('Quiz data is not available');
+      
       
       }
     }
@@ -162,18 +171,18 @@ export class QuizComponent implements OnInit, OnDestroy {
 
    // Calculate results when quiz ends
    calculateResults(): void {
-    const endTime = Date.now();
-    const timeDifference = endTime - this.startTime; // Time in milliseconds
-    this.timeTaken = this.formatTime(timeDifference);
-
-    // Pass results to StoreService
-    this.storeService.setQuizResults({
-      score: this.score(),
-      correctAnswers: this.correctAnswers,
-      totalQuestions: this.quiz()?.questions.length || 0,
-      timeTaken: this.timeTaken
-    });
-  }
+    const quizValue = this.quiz();
+    if (quizValue && quizValue.questions) {
+      this.correctAnswers = quizValue.questions.reduce((acc, question, index) => {
+        const userAnswer = this.userAnswers().get(index);
+        if (userAnswer === question.correct_answer) {
+          acc++;
+        }
+        return acc;
+      }, 0);
+    }
+    this.timeTaken = ((Date.now() - this.startTime) / 1000).toFixed(2);
+    }
 
   // Utility method to format time
   formatTime(milliseconds: number): string {

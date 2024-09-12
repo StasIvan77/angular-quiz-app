@@ -21,14 +21,14 @@ export class StoreService {
   
 
   constructor(private quizService: QuizService) {
-    this.fetchQuizzes();
+   // this.fetchQuizzes();
   }
 
-  private fetchQuizzes(): void {
-    this.quizService.getRandomQuiz(10).subscribe((quizzes: Quiz[]) => { // Explicitly type the parameter
-      this.quizzes.update(() => quizzes);
-    });
-  }
+  // private fetchQuizzes(): void {
+  //   this.quizService.getRandomQuiz(10).subscribe((quizzes: Quiz[]) => { // Explicitly type the parameter
+  //     this.quizzes.update(() => quizzes);
+  //   });
+  // }
 
   getQuizzes(): Quiz[] {
     return this.quizzes(); // Access the current value of the quizzes signal
@@ -51,7 +51,7 @@ export class StoreService {
   }
 
 
-  //LOGIC FOR COUNT RESULTS
+  //LOGIC FOR COUNT
   // Set the results after the quiz is finished
   setQuizResults(results: { score: number; correctAnswers: number; totalQuestions: number; timeTaken: string }) {
     this.quizResults.set(results);
