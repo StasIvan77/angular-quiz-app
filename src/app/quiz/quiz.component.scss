@@ -1,8 +1,14 @@
-/* src/app/quiz/quiz.component.scss */
+// Import shared styles
+@import '../../styles/shared.scss';
+
+// Component-specific styles
 .quiz-container {
   @apply flex items-center justify-center h-screen p-4;
   @apply relative;
   @apply bg-gradient-to-r from-blue-500 to-yellow-500;
+  background: linear-gradient(45deg, blue-500, yellow-500);
+  background-size: 200% 200%;
+  animation: waveGradient 10s ease infinite;
 }
 
 .quiz-card {
@@ -43,6 +49,7 @@
   position: relative;
   z-index: 1;
 }
+
 .answers-container {
   @apply flex flex-col items-center w-full;
   @apply mb-6;
@@ -57,13 +64,7 @@
   @apply flex justify-center items-center;
 
   .answer-button {
-    @apply w-full h-24 md:h-32 lg:h-40;
-    @apply text-2xl font-semibold text-white bg-blue-600 hover:bg-blue-700; // Twice as large font
-    @apply rounded-lg;
-    @apply flex justify-center items-center;
-    @apply transition-colors duration-300;
-    background-color: hsl(208, 79%, 51%, 0.5);
-
+    // Use shared styles
   }
 }
 
@@ -82,27 +83,6 @@
     @apply absolute bottom-4 right-4;
     @apply transition-colors duration-300;
   }
-}
-
-@keyframes waveGradient {
-  0% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
-  100% {
-    background-position: 0% 0%;
-  }
-}
-
-.quiz-container {
-  @apply flex items-center justify-center h-screen p-4;
-  @apply relative;
-
-  background: linear-gradient(45deg, blue-500, yellow-500);
-  background-size: 200% 200%;
-  animation: waveGradient 10s ease infinite;
 }
 
 .timer {

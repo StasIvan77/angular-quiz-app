@@ -1,0 +1,24 @@
+// Shared Styles
+
+@keyframes waveGradient {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
+  
+  // Common button styles
+  .answer-button {
+    @apply w-full h-24 md:h-32 lg:h-40;
+    @apply text-2xl font-semibold text-white bg-blue-600 hover:bg-blue-700; 
+    @apply rounded-lg;
+    @apply flex justify-center items-center;
+    @apply transition-colors duration-300;
+    background-color: hsl(208, 79%, 51%, 0.5);
+  }
+  
