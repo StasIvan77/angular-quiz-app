@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, Signal } from '@angular/core';
+import { Component, OnInit, signal, Signal, ViewEncapsulation } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { StoreService } from '../services/store.service';
@@ -10,6 +10,9 @@ import { QuizService } from '../services/quiz.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
@@ -18,11 +21,14 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   imports: [
     CommonModule,
+    MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
     FormsModule,
     ReactiveFormsModule
   ]  // Ensure CommonModule is imported here
@@ -48,7 +54,7 @@ export class HomeComponent implements OnInit {
   ) {
     this.quizForm = this.fb.group({
       category: [null], 
-      amount: [3, [Validators.required, Validators.min(1)]],
+      amount: [1, [Validators.required, Validators.min(1), Validators.max(50)]], // Min 1, Max 50
       difficulty: [''], // Add difficulty form control
       type: [''], // Add type form control
       encoding: [''] // Add encoding form control
@@ -108,5 +114,11 @@ export class HomeComponent implements OnInit {
       this.storeService.setCurrentQuiz(quiz);
       this.router.navigate(['/quiz']);
     });
+  }
+
+  isShaking = true; // Initially set to true to start the shake animation
+
+  stopShake() {
+    this.isShaking = false; // Set to false when you want to stop the animation
   }
 }

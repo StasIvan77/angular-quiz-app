@@ -1,0 +1,87 @@
+.finish-container {
+    @apply flex flex-col items-center justify-center h-screen p-4; // Centering content and making it full screen
+    @apply bg-gradient-to-r from-purple-500 to-pink-500; // Gradient background
+    @apply text-white; // White text for good contrast
+  }
+  
+  h2 {
+    @apply text-4xl font-bold mb-8; // Large, bold heading with margin at the bottom
+  }
+  
+  .finish-card {
+    @apply bg-white p-8 rounded-lg shadow-xl; // White background card with padding, rounded corners, and shadow
+    @apply text-gray-800; // Dark text color for readability on white background
+    background-color: rgba(255, 255, 255, 0.5); // Semi-transparent white
+  }
+  
+  .finish-stats {
+    @apply flex flex-col items-start space-y-4 mb-6; // Flexbox layout for stats with spacing between items
+  }
+  
+  /* Стиль для Score */
+  .finish-stat:first-child {
+    @apply text-6xl font-extrabold text-center; // Increase font size and center the text
+    @apply pb-3 mb-4;
+    font-size: 4rem; // Double the size of the default font size (1.5rem * 2)
+  }
+  
+  /* Для негативного значення Score */
+  .negative-score {
+    @apply text-red-600; /* Червоний колір для від'ємних значень */
+  }
+  
+  /* Для позитивного значення Score */
+  .positive-score {
+    @apply text-green-500; /* Зелений колір для позитивних значень */
+    font-weight: bold;
+  }
+  
+  /* Стиль для Time Taken */
+  .finish-stat:nth-child(2) {
+    @apply text-2xl italic font-semibold text-rose-700; /* Колір - темно-рожевий */
+    @apply pl-3 mb-3; /* Зменшені відступи */
+  }
+  
+  /* Стиль для Correct Answers */
+  .finish-stat:nth-child(3) {
+    @apply text-xl italic font-medium text-gray-700; /* Колір - темно-сірий */
+    @apply pl-3 mb-2; /* Зменшені відступи */
+  }
+  
+  /* Стиль для Total Questions */
+  .finish-stat:nth-child(4) {
+    @apply text-xl italic font-medium text-gray-700; /* Колір - темно-сірий */
+    @apply pl-3; /* Зменшені відступи */
+  }
+  
+  .button-group {
+    @apply flex items-center; // Align items in a row and center them vertically
+  }
+  
+  .btn-restart {
+    @apply bg-blue-500 text-white hover:bg-blue-600 font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300;
+    background-color: rgba(59, 130, 246, 0.6); // Semi-transparent blue
+  }
+  
+  .btn-menu {
+    @apply bg-red-500 text-white hover:bg-red-600 font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300;
+    background-color: rgba(248, 113, 113, 0.6); // Semi-transparent red
+  }
+  
+  ml-auto {
+    @apply ml-auto; // Automatically margin-left to push the button to the right
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .finish-container {
+    animation: fadeIn 1s ease-in-out; // Плавна анімація появи
+  }
+  

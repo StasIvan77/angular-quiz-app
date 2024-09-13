@@ -1,3 +1,32 @@
+@import "@angular/material/prebuilt-themes/azure-blue.css";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+body {
+    @apply bg-blue-500;
+  }
+
+
+  @keyframes infinite-eight {
+    0% {
+      transform: translateX(0) translateY(0) rotate(0);
+    }
+    25% {
+      transform: translateX(50px) translateY(-50px);
+    }
+    50% {
+      transform: translateX(0) translateY(0) rotate(0);
+    }
+    75% {
+      transform: translateX(-50px) translateY(50px) rotate(0);
+    }
+    100% {
+      transform: translateX(0) translateY(0) rotate(0);
+    }
+  }
+  
+  .shake-text {
+    display: inline-block;
+    animation: infinite-eight 4s linear infinite; /* Adjust duration as needed */
+  }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from '../services/store.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-finish',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './finish.component.html',
   styleUrls: ['./finish.component.scss']
 })
@@ -39,6 +40,37 @@ export class FinishComponent implements OnInit {
 
   restartQuiz(): void {
     this.storeService.resetQuiz();
-    this.router.navigate(['/home']); // Redirect back to home page to start again
+    this.router.navigate(['/quiz']); // Redirect back to home page to start again
   }
+  goToMenu(): void {
+    this.router.navigate(['/home']); // Переходимо до головного меню
+  }
+  getScoreStyle() {
+    const maxIntensity = 255; // Maximum intensity of red
+    const minRedIntensity = 0.2 * maxIntensity; // 20% red intensity
+    
+    if (this.score < 0) {
+      // For negative values: starting red intensity is set to a higher value
+      const intensity = Math.min(Math.abs(this.score) * 50, maxIntensity); // Increased multiplier for more red
+      return {
+        'color': `rgb(${Math.max(minRedIntensity, 255 - intensity)}, 0, 0)` // Intense red
+      };
+    } else {
+      // For positive values: transitioning from light green to dark green
+      const maxGreen = 255; // Maximum intensity of green
+      const intensity = Math.min(this.score * 5, maxGreen); // Adjust multiplier to control color transition
+      return {
+        'color': `rgb(0, ${maxGreen - intensity}, 0)` // Green gradient
+      };
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }
