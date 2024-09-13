@@ -1,16 +1,23 @@
 {
   "name": "quizzes-app",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "engines": {
+  "node": "20.x",
+  "npm": "10.x"
+},
+
   "scripts": {
+    
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+   "start": "http-server ./dist/angular-quiz-app",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:quizzes-app": "node dist/quizzes-app/server/server.mjs"
   },
   "private": true,
   "dependencies": {
+    "http-server": "^14.1.1",
     "@angular/animations": "^18.2.0",
     "@angular/cdk": "^18.2.3",
     "@angular/common": "^18.2.0",

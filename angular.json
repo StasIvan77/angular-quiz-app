@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            
             "outputPath": "dist/angular-quiz-app/",
              "baseHref": "/angular-quiz-app/",
             "index": "src/index.html",
@@ -30,7 +31,7 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }cd
+              }
             ],
             "styles": [
               "@angular/material/prebuilt-themes/magenta-violet.css",
@@ -44,7 +45,19 @@
             }
           },
           "configurations": {
-            "production": {              
+            "production": {   
+              "budgets": [
+          {
+            "type": "initial",
+            "maximumWarning": "1mb",    
+            "maximumError": "2mb"      
+          },
+          {
+            "type": "anyComponentStyle",
+            "maximumWarning": "500kb",   
+            "maximumError": "500kb"     
+          }
+        ],           
              "fileReplacements": [
     ],
     "optimization": true,
@@ -66,6 +79,19 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
+              "budgets": [
+  {
+    "type": "initial",
+    "maximumWarning": "1mb",
+    "maximumError": "2mb"
+  },
+  {
+    "type": "anyComponentStyle",
+    "maximumWarning": "10kb",
+    "maximumError": "15kb"
+  }
+]
+,
               "buildTarget": "quizzes-app:build:production"
             },
             "development": {
