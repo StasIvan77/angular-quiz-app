@@ -10,6 +10,8 @@
     
     "ng": "ng",
    "start": "http-server ./dist/angular-quiz-app",
+   "start:prod": "ng serve --configuration production",
+
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
