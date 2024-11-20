@@ -39,7 +39,7 @@ QuizzesApp is an application designed for answering questions and reviewing prog
 - **UI Library**: Angular Material.  
 - **API**: Open Trivia Database (or similar).  
 - **Version Control**: GitHub.  
-- **Hosting**: [Deployed on Netlify/Vercel/GitHub Pages](#) (insert link).  
+- **Hosting**: https://stasivan77.github.io/angular-quiz-app/
 
 ## Installation  
 
